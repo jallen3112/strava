@@ -1,0 +1,7 @@
+
+https://www.strava.com/oauth/authorize?
+client_id=170515&
+response_type=code&
+redirect_uri=http://localhost&
+scope=read_all,activity:read_all&
+approval_prompt=force

@@ -1,0 +1,9 @@
+token_type    : Bearer
+expires_at    : 1754021466
+expires_in    : 21600
+refresh_token : ffee87d16741c4f530c08989a4a4c8b436c6638f
+access_token  : e345f3ede457de84eab34cd23ddd6fdd11edcdb5
+athlete       : @{id=111296741; username=; resource_state=2; firstname=Josh; lastname=Allen; bio=; city=; state=; country=; sex=M; 
+                premium=False; summit=False; created_at=2022-12-03T12:21:36Z; updated_at=2025-07-30T21:08:35Z; badge_type_id=0; weight=;
+                profile_medium=https://lh3.googleusercontent.com/a/ALm5wu3yCai6rNCfEBfgATj2-fuXEOaC6G8PgdIi57ES=s96-c;
+                profile=https://lh3.googleusercontent.com/a/ALm5wu3yCai6rNCfEBfgATj2-fuXEOaC6G8PgdIi57ES=s96-c; friend=; follower=}

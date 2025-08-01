@@ -1,0 +1,5 @@
+six
+urllib3
+certifi
+requests
+python-dotenv
