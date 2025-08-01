@@ -5,7 +5,25 @@ import json
 from dotenv import load_dotenv
 
 class StravaAuthManager:
+    """
+    Handles OAuth token management for the Strava API.
+
+    This class manages:
+    - Loading and saving access/refresh tokens
+    - Refreshing expired tokens
+    - Returning a valid access token for authenticated API requests
+    """
+
     def __init__(self, client_id, client_secret, token_url, token_file="strava_token.json"):
+        """
+        Initializes the authentication manager with credentials and token file location.
+
+        Args:
+            client_id (str): Strava API client ID.
+            client_secret (str): Strava API client secret.
+            token_url (str): The URL endpoint for requesting/refreshing tokens.
+            token_file (str): Path to the JSON file storing tokens. Defaults to 'strava_token.json'.
+        """
         self.client_id = client_id
         self.client_secret = client_secret
         self.token_url = token_url
@@ -13,23 +31,49 @@ class StravaAuthManager:
         self.tokens = self._load_tokens()
 
     def _load_tokens(self):
-        '''Retreives tokens from local json file'''
+        """
+        Loads tokens from the local token file.
+
+        Returns:
+            dict: Token dictionary containing at least access_token and refresh_token.
+        """
         try:
             with open(self.token_file, "r") as f:
-                return eval(f.read())
+                return eval(f.read())  # Consider replacing with json.load for safety
         except (FileNotFoundError, json.JSONDecodeError):
             return {}
 
     def _save_tokens(self, tokens):
+        """
+        Saves the token dictionary to the local token file.
+
+        Args:
+            tokens (dict): Token dictionary to save.
+        """
         with open(self.token_file, "w") as f:
             json.dump(tokens, f)
         self.tokens = tokens
 
     def _is_token_expired(self):
+        """
+        Checks whether the current access token is expired.
+
+        Returns:
+            bool: True if token is expired, False otherwise.
+        """
         expires_at = self.tokens.get("expires_at", 0)
         return time.time() > expires_at
 
     def refresh_access_token(self):
+        """
+        Refreshes the access token using the stored refresh token.
+
+        Returns:
+            str: A new valid access token.
+
+        Raises:
+            Exception: If the token refresh request fails.
+        """
         print(self.tokens.get('refresh_token'))
         response = requests.post(self.token_url, data={
             'client_id': self.client_id,
@@ -47,18 +91,12 @@ class StravaAuthManager:
         return tokens['access_token']
 
     def get_valid_access_token(self):
+        """
+        Returns a valid access token, refreshing it if necessary.git 
+
+        Returns:
+            str: A valid (refreshed or current) access token.
+        """
         if not self.tokens or self._is_token_expired():
             return self.refresh_access_token()
         return self.tokens['access_token']
-
-# Example usage
-if __name__ == "__main__":
-    load_dotenv()
-    CLIENT_ID = os.getenv("STRAVA_CLIENT_ID")
-    CLIENT_SECRET = os.getenv("STRAVA_CLIENT_SECRET")
-    TOKEN_URL = "https://www.strava.com/oauth/token"
-
-    auth_manager = StravaAuthManager(CLIENT_ID, CLIENT_SECRET, TOKEN_URL)
-    access_token = auth_manager.get_valid_access_token()
-    print("Valid Access Token:", access_token)
-
