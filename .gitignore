@@ -209,3 +209,5 @@ generated-python-strava*
 swagger-codegen*
 strava_token.json
 refresh-token.txt
+route_map.html
+strava_activities.csv

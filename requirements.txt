@@ -3,3 +3,6 @@ urllib3
 certifi
 requests
 python-dotenv
+pandas
+folium 
+polyline
