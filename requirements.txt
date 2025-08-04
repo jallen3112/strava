@@ -6,3 +6,5 @@ python-dotenv
 pandas
 folium 
 polyline
+plotly 
+kaleido
