@@ -2,7 +2,7 @@ import os
 import requests
 import time
 import json
-from dotenv import load_dotenv
+
 
 class StravaAuthManager:
     """
