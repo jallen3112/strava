@@ -121,3 +121,27 @@ class MapGenerator:
 
         with open(file_path, 'w') as f:
             f.write(html)
+
+
+#     <!-- from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+# from PIL import Image
+# import time
+
+# def capture_map_screenshot(html_file, output_image='map_snapshot.png', width=1280, height=800):
+#     options = Options()
+#     options.headless = True
+#     options.add_argument(f"--window-size={width},{height}")
+
+#     driver = webdriver.Chrome(options=options)  # Use Firefox() if using geckodriver
+#     driver.get("file://" + html_file)
+
+#     time.sleep(5)  # wait for the map and tiles to fully load
+
+#     screenshot = driver.get_screenshot_as_png()
+#     driver.quit()
+
+#     with open(output_image, 'wb') as f:
+#         f.write(screenshot)
+
+#     print(f"Saved snapshot to {output_image}") -->
