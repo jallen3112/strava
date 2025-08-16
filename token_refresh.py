@@ -64,7 +64,7 @@ class StravaAuthManager:
         expires_at = self.tokens.get("expires_at", 0)
         return time.time() > expires_at
 
-    def refresh_access_token(self) -> str:
+    def _refresh_access_token(self) -> str:
         """
         Refreshes the access token using the stored refresh token.
 
@@ -74,7 +74,7 @@ class StravaAuthManager:
         Raises:
             Exception: If the token refresh request fails.
         """
-        print(self.tokens.get('refresh_token'))
+        print(f"Refreshed Access Token: {self.tokens.get('refresh_token')}")
         response = requests.post(self.token_url, data={
             'client_id': self.client_id,
             'client_secret': self.client_secret,
@@ -98,5 +98,5 @@ class StravaAuthManager:
             str: A valid (refreshed or current) access token.
         """
         if not self.tokens or self._is_token_expired():
-            return self.refresh_access_token()
+            return self._refresh_access_token()
         return self.tokens['access_token']

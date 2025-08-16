@@ -214,3 +214,4 @@ strava_activities.csv
 *.png
 *.gpx
 *.html
+map_outputs/
