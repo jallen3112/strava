@@ -213,5 +213,4 @@ route_map.html
 strava_activities.csv
 *.png
 *.gpx
-*.html
-map_outputs/
+map_outputs*
